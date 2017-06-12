@@ -1,3 +1,5 @@
+# Description: This script cleans MOD1- the data for the calibration stage.
+
 ###############
 #LIBS
 ###############
