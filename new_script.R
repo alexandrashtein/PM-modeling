@@ -1,1 +1,0 @@
-## This is a new script for git test in Rstudio Server
