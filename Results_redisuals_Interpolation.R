@@ -1,5 +1,20 @@
 ## This code plots the results of Residuals intepolation improvment
 
+df <- data.frame(stn=character(),RMSE.MIX=numeric(0), RMSE.MIX.I=numeric(0), R2.MIX=numeric(0), R2.MIX.I=numeric(0),stringsAsFactors=FALSE)
+
+for (i in 1:length(res))
+{
+  # Compute residuals
+  res[[i]]$resid.mix <- res[[i]]$PM25-res[[i]]$pred.m3.mix
+  res[[i]]$resid.mix.I <- res[[i]]$PM25-res[[i]]$pred.m3.mix.I
+  # Calculate RMSE and R2
+  df[i,"RMSE.MIX"] <- round(rmse(res[[i]]$resid.mix),2)
+  df[i,"RMSE.MIX.I"] <- round(rmse(res[[i]]$resid.mix.I),2)
+  df[i,"R2.MIX"] <- summary(lm(PM25~pred.m3.mix,data=res[[i]]))$r.squared
+  df[i,"R2.MIX.I"] <- summary(lm(PM25~pred.m3.mix.I,data=res[[i]]))$r.squared
+  df[i,"stn"] <- as.character(res[[i]]$stn[1])
+}
+
 # Load needed code
 source("/media/qnap/Data/code/R_functions/rmspe.r")
 
